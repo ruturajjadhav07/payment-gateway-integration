@@ -9,6 +9,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -29,6 +31,14 @@ public class ProductServiceImpl implements ProductService{
         return convertToProductResponse(product);
     }
 
+    // Get all products
+    @Override
+    public List<ProductResponse> getAllProducts() {
+        List<ProductEntity> products = productRepository.findAll();
+        return products.stream()
+                .map(product -> convertToProductResponse(product))
+                .collect(Collectors.toList());
+    }
 
 
     // create ProductEntity to response
