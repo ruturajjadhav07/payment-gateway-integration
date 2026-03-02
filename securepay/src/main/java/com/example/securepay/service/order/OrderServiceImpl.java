@@ -17,6 +17,7 @@ import com.example.securepay.repository.userRepo.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
@@ -33,6 +34,7 @@ public class OrderServiceImpl implements OrderService {
     private final UserRepository userRepository;
     private final ProductRepository productRepository;
 
+    // Create order
     @Override
     @Transactional
     public OrderResponse createOrder(OrderRequest request) {
@@ -42,6 +44,24 @@ public class OrderServiceImpl implements OrderService {
         OrderEntity savedOrder = orderRepository.save(order);
 
         return convertToOrderResponse(savedOrder);
+    }
+
+    // Get order details of particular user
+    @Override
+    public List<OrderResponse> getOrderDetailsOfUser() {
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+
+        UserEntity user = userRepository.findByUsername(username).orElseThrow(() -> new UsernameNotFoundException("User not found"));
+
+        List<OrderEntity> orders = orderRepository.findByuserId(user.getId());
+        List<OrderResponse> responseList = new ArrayList<>();
+        for (OrderEntity order : orders) {
+            responseList.add(convertToOrderResponse(order));
+        }
+        if (orders.isEmpty()) {
+            throw new ResourceNotFoundException("No orders found for this user");
+        }
+        return responseList;
     }
 
     private OrderEntity prepareOrderWithItems(OrderRequest request) {

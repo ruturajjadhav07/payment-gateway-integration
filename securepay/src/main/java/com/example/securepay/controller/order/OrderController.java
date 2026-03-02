@@ -8,9 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -24,5 +27,12 @@ public class OrderController {
     public ResponseEntity<OrderResponse> createOrder(@Valid @RequestBody OrderRequest request) {
         OrderResponse order = orderService.createOrder(request);
         return ResponseEntity.status(HttpStatus.CREATED).body(order);
+    }
+
+    @PreAuthorize("hasRole('USER')")
+    @GetMapping("/my-orders")
+    public ResponseEntity<List<OrderResponse>> getUserOrders() {
+        List<OrderResponse> orders = orderService.getOrderDetailsOfUser();
+        return ResponseEntity.ok(orders);
     }
 }
