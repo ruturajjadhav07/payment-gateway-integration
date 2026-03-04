@@ -7,6 +7,7 @@ import com.example.securepay.dtos.order.OrderResponse;
 import com.example.securepay.dtos.product.ProductResponse;
 import com.example.securepay.entities.order.OrderEntity;
 import com.example.securepay.entities.order.OrderItemEntity;
+import com.example.securepay.entities.order.OrderStatus;
 import com.example.securepay.entities.product.ProductEntity;
 import com.example.securepay.entities.user.UserEntity;
 import com.example.securepay.exception.InsufficientStockException;
@@ -77,6 +78,7 @@ public class OrderServiceImpl implements OrderService {
         OrderEntity order = OrderEntity.builder()
                 .user(user)
                 .createdAt(LocalDateTime.now())
+                .status(OrderStatus.CREATED)
                 .build();
 
         List<OrderItemEntity> orderItems = new ArrayList<>();
@@ -137,6 +139,7 @@ public class OrderServiceImpl implements OrderService {
                 .orderId(order.getOrderId())
                 .userId(order.getUser().getId())
                 .totalAmount(order.getTotalAmount())
+                .status(order.getStatus())
                 .createdAt(order.getCreatedAt())
                 .items(itemResponses)
                 .build();
