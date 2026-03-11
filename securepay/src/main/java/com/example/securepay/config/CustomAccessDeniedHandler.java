@@ -21,7 +21,7 @@ public class CustomAccessDeniedHandler implements AccessDeniedHandler {
         response.setStatus(HttpServletResponse.SC_FORBIDDEN);
         response.setContentType("application/json");
 
-        response.getWriter().write("""
+        response.getWriter().write("""  
         {
             "error": true,
             "status": 403,

@@ -26,12 +26,13 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
 
-    private static final List<String> PUBLIC_URLS = List.of("/login", "/register");
+    private static final List<String> PUBLIC_URLS = List.of("/login", "/register/**");
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String path = request.getServletPath();
-        if (PUBLIC_URLS.contains(path)) {
+
+        if (path.startsWith("/login") || path.startsWith("/register")) {
             filterChain.doFilter(request, response);
             return;
         }

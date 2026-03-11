@@ -47,6 +47,7 @@ public class UserLogin {
             // once jwt token is created we need to add it in cookie
             ResponseCookie cookie = ResponseCookie.from("jwt", jwtToken)
                     .httpOnly(true)
+                    .secure(false)
                     .path("/")
                     .maxAge(Duration.ofDays(1))
                     .sameSite("Strict")
