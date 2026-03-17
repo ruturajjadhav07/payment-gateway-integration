@@ -3,6 +3,7 @@
 import Link from "next/link";
 import useAuth from "../lib/useAuth";
 import ProductsPage from "../products/page";
+import { FaGithub, FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa";
 
 export default function Home() {
   const { user, loading } = useAuth();
@@ -17,7 +18,6 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-gradient-to-b from-gray-50 to-gray-100">
-      
       {/* Navbar */}
       <nav className="flex justify-between items-center px-10 py-4 bg-white/80 backdrop-blur-md shadow-sm border-b sticky top-0 z-50">
         <div className="flex items-center gap-3">
@@ -80,7 +80,6 @@ export default function Home() {
         </h3>
 
         <div className="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
-          
           <div className="p-8 bg-gradient-to-br from-blue-50 to-white rounded-2xl shadow-sm hover:shadow-xl hover:-translate-y-1 transition">
             <h4 className="text-xl font-semibold mb-3 text-blue-600">
               ⚡ Fast Ordering
@@ -110,15 +109,51 @@ export default function Home() {
               intuitive admin dashboard.
             </p>
           </div>
-
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="text-center py-8 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600">
-        © {new Date().getFullYear()} <span className="font-semibold">OrderFlow</span>. All rights reserved.
-      </footer>
+      <footer className="flex justify-between items-center px-10 py-6 bg-gradient-to-r from-gray-100 to-gray-200 text-gray-600">
+        <p>
+          © {new Date().getFullYear()}{" "}
+          <span className="font-semibold">OrderFlow</span>. All rights reserved.
+        </p>
 
+        {/* Social Icons */}
+        <div className="flex gap-5 text-xl">
+          <a
+            href="https://github.com/ruturajjadhav07"
+            target="_blank"
+            className="hover:text-black transition"
+          >
+            <FaGithub />
+          </a>
+
+          <a
+            href="https://www.linkedin.com/in/ruturaj-jadhav-0a250821b/"
+            target="_blank"
+            className="hover:text-blue-600 transition"
+          >
+            <FaLinkedin />
+          </a>
+
+          <a
+            href="https://www.instagram.com/ruturajj_07/"
+            target="_blank"
+            className="hover:text-pink-500 transition"
+          >
+            <FaInstagram />
+          </a>
+
+          <a
+            href="https://x.com/spoiidermon"
+            target="_blank"
+            className="hover:text-sky-500 transition"
+          >
+            <FaTwitter />
+          </a>
+        </div>
+      </footer>
     </main>
   );
 }
