@@ -6,7 +6,6 @@ import useAuth from "../lib/useAuth";
 import UserLogin from "../userComponent/UserLogin";
 
 export default function LoginPage() {
-
   const { user, loading } = useAuth();
   const router = useRouter();
 

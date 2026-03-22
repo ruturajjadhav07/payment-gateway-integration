@@ -47,7 +47,8 @@ export default function Home() {
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center text-center px-6 py-28 bg-gradient-to-r from-blue-50 via-indigo-50 to-purple-50">
         <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6 leading-tight">
-          Simplify Your <span className="text-blue-600">Ordering Experience</span>
+          Simplify Your{" "}
+          <span className="text-blue-600">Ordering Experience</span>
         </h2>
 
         <p className="text-lg text-gray-600 max-w-2xl mb-10">
